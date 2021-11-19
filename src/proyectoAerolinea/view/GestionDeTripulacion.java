@@ -10,15 +10,27 @@ import proyectoAerolinea.controller.GestionDeTripulacionController;
 import proyectoAerolinea.model.CaribeAirlines;
 
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.jface.databinding.viewers.ObservableSetContentProvider;
+import org.eclipse.core.databinding.observable.map.IObservableMap;
+import org.eclipse.core.databinding.beans.PojoObservables;
+import proyectoAerolinea.model.Piloto;
+import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
+import org.eclipse.core.databinding.observable.set.IObservableSet;
+import org.eclipse.core.databinding.beans.PojoProperties;
 
 public class GestionDeTripulacion extends Composite {
-	
+	private DataBindingContext m_bindingContext;
+
 	GestionDeTripulacionController gestionDeTripulacioncontroller = new GestionDeTripulacionController();
 	CaribeAirlines cariberAirlines = gestionDeTripulacioncontroller.getCaribeAirlines();
 	private Table table;
 	private Table table_1;
 	private Table table_2;
 	private Table table_3;
+	private TableViewer tableViewer;
 
 	/**
 	 * Create the composite.
@@ -32,11 +44,16 @@ public class GestionDeTripulacion extends Composite {
 		grpPilotos.setText("Pilotos");
 		grpPilotos.setBounds(30, 10, 189, 160);
 
-		TableViewer tableViewer = new TableViewer(grpPilotos, SWT.BORDER | SWT.FULL_SELECTION);
+		tableViewer = new TableViewer(grpPilotos, SWT.BORDER | SWT.FULL_SELECTION);
 		table = tableViewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		table.setBounds(10, 20, 169, 130);
+
+		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnNombre = tableViewerColumn.getColumn();
+		tblclmnNombre.setWidth(165);
+		tblclmnNombre.setText("Nombre");
 
 		Group grpCopilotos = new Group(this, SWT.NONE);
 		grpCopilotos.setText("CoPilotos");
@@ -83,11 +100,25 @@ public class GestionDeTripulacion extends Composite {
 		Button btnEliminarTripulante = new Button(grpTripulacion, SWT.NONE);
 		btnEliminarTripulante.setBounds(512, 65, 110, 25);
 		btnEliminarTripulante.setText("Eliminar Tripulante");
+		m_bindingContext = initDataBindings();
 
 	}
 
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
+	}
+	protected DataBindingContext initDataBindings() {
+		DataBindingContext bindingContext = new DataBindingContext();
+		//
+		ObservableSetContentProvider setContentProvider = new ObservableSetContentProvider();
+		IObservableMap observeMap = PojoObservables.observeMap(setContentProvider.getKnownElements(), Piloto.class, "nombre");
+		tableViewer.setLabelProvider(new ObservableMapLabelProvider(observeMap));
+		tableViewer.setContentProvider(setContentProvider);
+		//
+		IObservableSet listaPilotosCariberAirlinesObserveSet = PojoProperties.set("listaPilotos").observe(cariberAirlines);
+		tableViewer.setInput(listaPilotosCariberAirlinesObserveSet);
+		//
+		return bindingContext;
 	}
 }

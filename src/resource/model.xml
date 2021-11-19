@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_311" class="java.beans.XMLDecoder">
+ <object class="proyectoAerolinea.model.CaribeAirlines">
+  <void property="listaPilotos">
+   <object class="java.util.HashSet">
+    <void method="add">
+     <object class="proyectoAerolinea.model.Piloto">
+      <void property="correoElectronico">
+       <string>zuluaga@gmail.com</string>
+      </void>
+      <void property="direccion">
+       <string>zuluaga</string>
+      </void>
+      <void property="estudiosRealizados">
+       <string>bachiller, aviacion , medico</string>
+      </void>
+      <void property="identificacion">
+       <string>11365897</string>
+      </void>
+      <void property="nombre">
+       <string>yeferson</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="proyectoAerolinea.model.Piloto">
+      <void property="correoElectronico">
+       <string>julianita@gmail.com</string>
+      </void>
+      <void property="direccion">
+       <string>arias</string>
+      </void>
+      <void property="estudiosRealizados">
+       <string>bachiller, aviacion , ingeniera aeroespacial</string>
+      </void>
+      <void property="identificacion">
+       <string>12447836</string>
+      </void>
+      <void property="nombre">
+       <string>juliana</string>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="proyectoAerolinea.model.Piloto">
+      <void property="correoElectronico">
+       <string>cris@gmail.com</string>
+      </void>
+      <void property="direccion">
+       <string>osorio</string>
+      </void>
+      <void property="estudiosRealizados">
+       <string>bachiller, aviacion en la universidad del quindio</string>
+      </void>
+      <void property="identificacion">
+       <string>10013698</string>
+      </void>
+      <void property="nombre">
+       <string>cristian</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

@@ -13,7 +13,7 @@ public class Persistencia {
 
 	// RUTAS DE LOS ARCHIVOS
 
-	public static final String RUTA_ARCHIVO_MODELO_XML = "C:/td/persistencia/model.xml";
+	public static final String RUTA_ARCHIVO_MODELO_XML = "src\\resource\\model.xml";
 
 
 	public static void guardarRecursoXMLRelojeria(CaribeAirlines caribeAirlines) throws Exception {
